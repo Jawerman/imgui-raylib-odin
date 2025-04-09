@@ -1,0 +1,44 @@
+# https://taskfile.dev
+
+version: '3'
+
+tasks:
+  ui:
+    deps:
+      - build_ui
+    cmds:
+      - bin/ui
+    method: none
+    silent: true
+
+  build_ui:
+    cmds:
+      - mkdir -p bin
+      - odin build ui -out:bin/ui -o:speed -collection:dependencies=dependencies
+    sources:
+      - ui/**/*.odin
+      - dependencies/imgui/**/*.odin
+    generates:
+      - bin/ui
+    silent: true
+
+
+  main:
+    deps:
+      - build_main
+    cmds:
+      - bin/main
+    method: none
+    silent: true
+
+  build_main:
+    cmds:
+      - mkdir -p bin
+      - odin build main -out:bin/main -o:speed -collection:dependencies=dependencies
+    sources:
+      - main/**/*.odin
+      - dependencies/imgui/**/*.odin
+    generates:
+      - bin/main
+    silent: true
+
