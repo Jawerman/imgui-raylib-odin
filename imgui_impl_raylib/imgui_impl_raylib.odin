@@ -5,9 +5,7 @@ import "core:c"
 import "core:math"
 import "core:mem"
 
-// Follow build instruction for imgui bindings in: https://gitlab.com/L-4/odin-imgui
 import "dependencies:imgui"
-// import "../dependencies/imgui"
 import rl "vendor:raylib"
 import rlgl "vendor:raylib/rlgl"
 
@@ -192,7 +190,7 @@ render_triangles :: proc(
 		return
 	}
 
-	texture: ^rl.Texture = transmute(^rl.Texture)texture_ptr
+	texture: ^rl.Texture = cast(^rl.Texture)texture_ptr
 
 	texture_id: u32 = (texture == nil) ? 0 : texture.id
 
